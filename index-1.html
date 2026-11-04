@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>كيكيز برجر</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍔</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--g1:#0f5a2f;--g2:#1f9d55;--g3:#e9f7ee;--ink:#0b2a18;--cream:#fffdf5;--gold:#ffc83d}
+*{box-sizing:border-box;margin:0}
+html,body{min-height:100%}
+body{font-family:'Cairo',system-ui,sans-serif;background:linear-gradient(180deg,var(--g1) 0,var(--g2) 100%);background-attachment:fixed;color:var(--ink);padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.wrap{max-width:460px;margin:0 auto;padding:36px 18px 40px;text-align:center}
+.logo{width:120px;height:120px;border-radius:50%;background:var(--cream);margin:0 auto 14px;display:grid;place-items:center;font-size:62px;border:5px solid var(--gold);overflow:hidden}
+.logo img{width:100%;height:100%;object-fit:cover}
+h1{color:var(--cream);font-weight:900;font-size:32px}
+.sub{color:#d6f3e0;margin:4px 0 26px;font-weight:500}
+.btn{display:flex;align-items:center;gap:14px;width:100%;padding:16px 18px;margin-bottom:14px;border-radius:18px;background:var(--cream);color:var(--ink);text-decoration:none;font-weight:700;font-size:18px;border:0;font-family:inherit;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.18);transition:transform .12s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.18)}
+.btn .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:22px;color:#fff;flex:none}
+.menu .ic{background:var(--g1)}.fb .ic{background:#1877f2}.ig .ic{background:linear-gradient(45deg,#f9a03f,#e1306c,#833ab4)}.tel .ic{background:var(--g2)}
+.menu{background:var(--gold);font-size:20px}
+.btn:focus-visible{outline:3px solid #fff;outline-offset:3px}
+#menuView{display:none}
+body.show-menu #home{display:none}
+body.show-menu #menuView{display:block}
+.back{background:var(--cream);margin-bottom:18px}
+.pages img{width:100%;display:block;border-radius:14px;margin-bottom:14px;background:var(--cream)}
+.empty{color:var(--cream);padding:30px 0}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="home">
+    <div class="logo"><img src="logo.png" alt="" onerror="this.replaceWith('🍔')"></div>
+    <h1>كيكيز برجر</h1>
+    <p class="sub">Kiki's Burger</p>
+    <a class="btn menu" href="#menu"><span class="ic">📖</span>المنيو</a>
+    <a class="btn fb" href="https://www.facebook.com/share/1DkC4bWaqW/" target="_blank" rel="noopener"><span class="ic">f</span>فيسبوك</a>
+    <a class="btn ig" href="https://www.instagram.com/kikisburger1?obrf=MXZmNjhidHF0aTlpNQ==" target="_blank" rel="noopener"><span class="ic">📷</span>انستجرام</a>
+    <a class="btn tel" href="tel:01036363710"><span class="ic">📞</span>اتصل بنا: 01036363710</a>
+  </div>
+  <div id="menuView">
+    <a class="btn back" href="#"><span class="ic" style="background:var(--g1)">→</span>رجوع</a>
+    <div class="pages" id="pages"></div>
+  </div>
+</div>
+<script>
+// ضع صور المنيو في نفس الفولدر بهذه الأسماء (أضف أو احذف حسب عدد الصفحات)
+var MENU_PAGES=['menu1.jpg','menu2.jpg'];
+var box=document.getElementById('pages');
+MENU_PAGES.forEach(function(src){
+  var i=new Image();i.src=src;i.alt='المنيو';i.loading='lazy';
+  i.onerror=function(){i.remove();if(!box.children.length&&!box.dataset.e){box.dataset.e=1;box.innerHTML='<p class="empty">المنيو هيتضاف قريباً</p>'}};
+  box.appendChild(i);
+});
+function route(){document.body.classList.toggle('show-menu',location.hash==='#menu');window.scrollTo(0,0)}
+window.addEventListener('hashchange',route);route();
+</script>
+</body>
+</html>
